@@ -284,6 +284,7 @@ export default function Setting() {
           value={currentSetting}
           onChange={(e) => {
             setCurrentSetting((e.target as HTMLSelectElement).value);
+            setCurrentEditorModel((e.target as HTMLSelectElement).value);
           }}
         >
           {currentModels.map((item) => (
@@ -297,7 +298,7 @@ export default function Setting() {
         </ErrorMessage>
       </FormItemContainer>
 
-      <FormItemContainer>
+      {/* <FormItemContainer>
         <label>Editor Model</label>
         <VSCodeDropdown
           value={currentEditorModel}
@@ -314,7 +315,7 @@ export default function Setting() {
         <ErrorMessage>
           {!currentEditorModel && 'Please select a editor model'}
         </ErrorMessage>
-      </FormItemContainer>
+      </FormItemContainer> */}
 
       <VSCodeDivider />
       <List>
