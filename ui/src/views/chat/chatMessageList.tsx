@@ -10,6 +10,7 @@ import {
   ChatUserMessage,
 } from '../../types';
 import { useChatStore } from '../../stores/useChatStore';
+// import { memo, useMemo, useState } from 'react';
 import { memo, useMemo } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
@@ -212,6 +213,42 @@ const ChatMessageItem = memo(function ChatMessageItem(props: {
 export default function ChatMessageList() {
   const { history, current } = useChatStore();
 
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTo({
+        top: scrollAreaRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [history, current?.text]);
+
+  // const [isScrolling, setIsScrolling] = useState(false);
+
+  // useEffect(() => {
+  //   if (scrollAreaRef.current && !isScrolling) {
+  //     scrollAreaRef.current.scrollTo({
+  //       top: scrollAreaRef.current.scrollHeight,
+  //       behavior: 'smooth',
+  //     });
+  //   }
+  // }, [history, current?.text, isScrolling]);
+
+  // const handleScroll = () => {
+  //   console.log('scroll');
+  //   if (scrollAreaRef.current) {
+  //     const { scrollTop, scrollHeight, clientHeight } = scrollAreaRef.current;
+  //     const isAtBottom = scrollHeight - (scrollTop + clientHeight) < 10; // 10px threshold
+
+  //     if (!isAtBottom) {
+  //       setIsScrolling(true);
+  //     } else {
+  //       setIsScrolling(false);
+  //     }
+  //   }
+  // };
+
   const historyItems = useMemo(() => {
     return (
       <>
@@ -252,12 +289,17 @@ export default function ChatMessageList() {
   }
 
   return (
-    <ScrollArea style={{ padding: '1rem', flexGrow: 1 }} disableX>
+    <ScrollArea
+      style={{ padding: '1rem', flexGrow: 1 }}
+      disableX
+      ref={scrollAreaRef}
+      // onScroll={handleScroll}
+    >
       <div style={{ lineHeight: '1.6' }}>
         {historyItems}
         {currentItem}
       </div>
-      <div style={{ minHeight: '50vh' }}></div>
+      {/* <div style={{ minHeight: '10vh' }}></div> */}
     </ScrollArea>
   );
 }

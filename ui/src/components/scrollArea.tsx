@@ -60,11 +60,11 @@ const ScrollArea = forwardRef<
   PropsWithChildren<
     { disableX?: boolean } & Pick<
       HTMLAttributes<HTMLDivElement>,
-      'style' | 'className'
+      'style' | 'className' | 'onScroll' // 添加 onScroll 属性
     >
   >
->((props) => {
-  const { children, className, disableX, ...other } = props;
+>((props, ref) => {
+  const { children, className, disableX, onScroll, ...other } = props;
   return (
     <ScrollAreaPrimitive.Root
       className={clsx(scrollAreaRootCss, className)}
@@ -72,6 +72,8 @@ const ScrollArea = forwardRef<
     >
       <ScrollAreaPrimitive.Viewport
         className={clsx(scrollAreaViewportCss, disableX && 'disable-x')}
+        ref={ref} // 将 ref 绑定到 ScrollAreaPrimitive.Viewport
+        onScroll={onScroll} // 将 onScroll 事件传递给 Viewport
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
