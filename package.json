@@ -1,20 +1,21 @@
 {
-  "name": "aider-composer",
+  "name": "aider-fish",
   "publisher": "lee2py",
-  "displayName": "Aider Composer",
+  "displayName": "Aider Fish",
   "description": "Seamless integration of Aider with VSCode",
-  "version": "1.8.0",
+  "version": "0.0.1",
   "icon": "resources/icon.png",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lee88688/aider-composer"
+    "url": "https://github.com/CnsMaple/vscode-aider-fish"
   },
   "engines": {
     "vscode": "^1.93.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "AI"
   ],
   "activationEvents": [
     "onStartupFinished"

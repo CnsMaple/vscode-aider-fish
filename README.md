@@ -1,5 +1,7 @@
 # Aider Composer
 
+> This plugin is fork from [aider-composer](https://github.com/lee88688/aider-composer), mainly used to fix some issues and add some easy-to-use features
+
 Aider Composer is a VSCode extension that integrates [Aider](https://github.com/Aider-AI/aider) into your development workflow. This extension is highly inspired by [cursor](https://www.cursor.com/) and [cline](https://github.com/cline/cline).
 
 ![demo](./resources/demo.gif)
@@ -91,6 +93,7 @@ In this extension, file reference is above the chat input area, you can click th
 ### Code Review
 
 When Aider modifies code, it will show you the code. You have two review options:
+
 - Use diff editor (default)
 - Use inline diff preview
 
