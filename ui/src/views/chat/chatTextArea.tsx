@@ -453,7 +453,7 @@ const ChatEditor = forwardRef<{ sendChat: () => void }>(
           renderLeaf={(props) => <Text {...props} />}
           onKeyDown={onKeyDown}
           onPaste={handlePaste}
-          placeholder="Ask anything, use @ to mention files."
+          placeholder="Ask anything ..."
         />
         <Popover.Root open={Boolean(target)}>
           <Popover.Anchor
@@ -568,7 +568,7 @@ function ChatActionBar(props: { onChatClick: () => void }) {
         </Popover.Content>
       </Popover.Root>
       <div style={{ flexGrow: 1 }} />
-      <ChatActionButton onClick={props.onChatClick}>⏎ chat</ChatActionButton>
+      <ChatActionButton onClick={props.onChatClick}>⏎ send</ChatActionButton>
     </div>
   );
 }

@@ -353,22 +353,23 @@ export const useChatStore = create(
             ...state,
             current: state.current
               ? {
-                  ...state.current,
-                  text: (state.current?.text ?? '') + chunkMessage.chunk,
-                }
+                ...state.current,
+                text: (state.current?.text ?? '') + chunkMessage.chunk,
+              }
               : state.current,
           }));
         });
 
         eventSource.addEventListener('usage', (event: { data: string }) => {
-          const usage = JSON.parse(event.data) as { usage: string };
+          const usage = JSON.parse(event.data);
+          // console.log('usage', usage);
           set((state) => ({
             ...state,
             current: state.current
               ? {
-                  ...state.current,
-                  usage: usage.usage,
-                }
+                ...state.current,
+                usage: usage,
+              }
               : state.current,
           }));
         });
