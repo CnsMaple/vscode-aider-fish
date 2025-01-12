@@ -235,7 +235,11 @@ export default function ChatMessageList() {
       );
     } else {
       currentItem = (
-        <div>
+        <div
+          style={{
+            padding: '0 20px 0 20px',
+          }}
+        >
           <RefreshCw
             size={16}
             style={{
