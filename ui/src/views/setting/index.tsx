@@ -234,13 +234,13 @@ const SettingForm = forwardRef<
 export default function Setting() {
   const models = useSettingStore((state) => state.models);
   const current = useSettingStore((state) => state.current);
-  const editorModel = useSettingStore((state) => state.editorModel);
+  // const editorModel = useSettingStore((state) => state.editorModel);
 
   const setSetting = useSettingStore((state) => state.setSetting);
   const setViewType = useExtensionStore((state) => state.setViewType);
 
   const [currentSetting, setCurrentSetting] = useState(current);
-  const [currentEditorModel, setCurrentEditorModel] = useState(editorModel);
+  // const [currentEditorModel, setCurrentEditorModel] = useState(editorModel);
   const [currentModels, setCurrentModels] = useState(models);
 
   const ref = useRef<SettingFormRef>(null);
@@ -271,7 +271,7 @@ export default function Setting() {
         </h1>
         <VSCodeButton
           onClick={async () => {
-            await setSetting(currentSetting, currentEditorModel, currentModels);
+            await setSetting(currentSetting, currentSetting, currentModels);
             setViewType('chat');
           }}
         >
@@ -284,7 +284,7 @@ export default function Setting() {
           value={currentSetting}
           onChange={(e) => {
             setCurrentSetting((e.target as HTMLSelectElement).value);
-            setCurrentEditorModel((e.target as HTMLSelectElement).value);
+            // setCurrentEditorModel((e.target as HTMLSelectElement).value);
           }}
         >
           {currentModels.map((item) => (
@@ -339,7 +339,7 @@ export default function Setting() {
                     onClick={() => {
                       if (currentSetting === item.name) {
                         setCurrentSetting('');
-                        setCurrentEditorModel('');
+                        // setCurrentEditorModel('');
                       }
                       setCurrentModels(
                         currentModels.filter((i) => i.name !== item.name),
