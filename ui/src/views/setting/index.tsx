@@ -336,6 +336,10 @@ export default function Setting() {
                     title="Delete this setting"
                     appearance="icon"
                     onClick={() => {
+                      if (currentSetting === item.name) {
+                        setCurrentSetting('');
+                        setCurrentEditorModel('');
+                      }
                       setCurrentModels(
                         currentModels.filter((i) => i.name !== item.name),
                       );
