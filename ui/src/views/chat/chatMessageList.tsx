@@ -11,7 +11,6 @@ import {
 } from '../../types';
 import { useChatStore } from '../../stores/useChatStore';
 import { memo, useMemo, useState } from 'react';
-// import { memo, useMemo } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 const textareaStyle = css({
@@ -214,15 +213,6 @@ export default function ChatMessageList() {
   const { history, current } = useChatStore();
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   if (scrollAreaRef.current) {
-  //     scrollAreaRef.current.scrollTo({
-  //       top: scrollAreaRef.current.scrollHeight,
-  //       behavior: 'smooth',
-  //     });
-  //   }
-  // }, [history, current?.text]);
 
   const [isAtBottom, setisAtBottom] = useState(false);
 

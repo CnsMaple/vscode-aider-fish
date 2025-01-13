@@ -25,7 +25,7 @@ class VscodeReactView implements WebviewViewProvider {
   private view?: WebviewView;
 
   setupPromise: Promise<void>;
-  private setupResolve: () => void = () => {};
+  private setupResolve: () => void = () => { };
   private isReady = false;
 
   private pendingMessages: any[] = [];
@@ -55,7 +55,7 @@ class VscodeReactView implements WebviewViewProvider {
         this.pendingMessages = [];
         resolve();
 
-        this.setupResolve = () => {};
+        this.setupResolve = () => { };
       };
     });
 
@@ -191,19 +191,17 @@ class VscodeReactView implements WebviewViewProvider {
 
     const csp = [
       `default-src 'none';`,
-      `script-src 'unsafe-eval' https://* ${
-        isProd
-          ? `'nonce-${nonce}'`
-          : // 这里的hash是计算的什么代码的hash？
-            // : `http://${localServerUrl} http://0.0.0.0:${localPort} '${reactRefreshHash}'`
-            `http://${localServerUrl} http://0.0.0.0:${localPort} 'unsafe-inline'`
+      `script-src 'unsafe-eval' https://* ${isProd
+        ? `'nonce-${nonce}'`
+        : // 这里的hash是计算的什么代码的hash？
+        // : `http://${localServerUrl} http://0.0.0.0:${localPort} '${reactRefreshHash}'`
+        `http://${localServerUrl} http://0.0.0.0:${localPort} 'unsafe-inline'`
       }`,
       `style-src ${webview.cspSource} 'self' 'unsafe-inline' https://*`,
       `font-src ${webview.cspSource} http://127.0.0.1:*`,
-      `connect-src https://* ${
-        isProd
-          ? `http://127.0.0.1:*`
-          : `ws://${localServerUrl} http://127.0.0.1:*`
+      `connect-src https://* ${isProd
+        ? `http://127.0.0.1:*`
+        : `ws://${localServerUrl} http://127.0.0.1:*`
       }`,
     ];
 
@@ -212,8 +210,8 @@ class VscodeReactView implements WebviewViewProvider {
         <head>
           <meta charset="UTF-8" />
           <meta http-equiv="Content-Security-Policy" content="${csp.join(
-            '; ',
-          )}">
+      '; ',
+    )}">
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
           <title>VSCode React Starter</title>
