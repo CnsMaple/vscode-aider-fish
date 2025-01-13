@@ -10,8 +10,8 @@ import {
   ChatUserMessage,
 } from '../../types';
 import { useChatStore } from '../../stores/useChatStore';
-// import { memo, useMemo, useState } from 'react';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
+// import { memo, useMemo } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 const textareaStyle = css({
@@ -215,6 +215,17 @@ export default function ChatMessageList() {
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
+  // useEffect(() => {
+  //   if (scrollAreaRef.current) {
+  //     scrollAreaRef.current.scrollTo({
+  //       top: scrollAreaRef.current.scrollHeight,
+  //       behavior: 'smooth',
+  //     });
+  //   }
+  // }, [history, current?.text]);
+
+  const [isAtBottom, setisAtBottom] = useState(false);
+
   useEffect(() => {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTo({
@@ -222,32 +233,29 @@ export default function ChatMessageList() {
         behavior: 'smooth',
       });
     }
-  }, [history, current?.text]);
+  }, [history]);
 
-  // const [isScrolling, setIsScrolling] = useState(false);
+  useEffect(() => {
+    if (scrollAreaRef.current && isAtBottom) {
+      scrollAreaRef.current.scrollTo({
+        top: scrollAreaRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [current, isAtBottom]);
 
-  // useEffect(() => {
-  //   if (scrollAreaRef.current && !isScrolling) {
-  //     scrollAreaRef.current.scrollTo({
-  //       top: scrollAreaRef.current.scrollHeight,
-  //       behavior: 'smooth',
-  //     });
-  //   }
-  // }, [history, current?.text, isScrolling]);
+  const handleScroll = () => {
+    if (scrollAreaRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollAreaRef.current;
+      const isAtBottom = scrollHeight - (scrollTop + clientHeight) < 50;
 
-  // const handleScroll = () => {
-  //   console.log('scroll');
-  //   if (scrollAreaRef.current) {
-  //     const { scrollTop, scrollHeight, clientHeight } = scrollAreaRef.current;
-  //     const isAtBottom = scrollHeight - (scrollTop + clientHeight) < 10; // 10px threshold
-
-  //     if (!isAtBottom) {
-  //       setIsScrolling(true);
-  //     } else {
-  //       setIsScrolling(false);
-  //     }
-  //   }
-  // };
+      if (isAtBottom) {
+        setisAtBottom(true);
+      } else {
+        setisAtBottom(false);
+      }
+    }
+  };
 
   const historyItems = useMemo(() => {
     return (
@@ -293,7 +301,7 @@ export default function ChatMessageList() {
       style={{ padding: '1rem', flexGrow: 1 }}
       disableX
       ref={scrollAreaRef}
-      // onScroll={handleScroll}
+      onScroll={handleScroll}
     >
       <div style={{ lineHeight: '1.6' }}>
         {historyItems}
