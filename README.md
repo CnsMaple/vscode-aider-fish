@@ -30,7 +30,6 @@ It is highly recommended to read the [Requirements](#requirements) and [Extensio
 
 Due to certain limitations and other issues, this extension may not implement all features available in Aider. Some limitations include:
 
-- Multiple workspaces are not supported
 - Git repository features are not used
 - Linting is not supported
 - Testing is not supported
